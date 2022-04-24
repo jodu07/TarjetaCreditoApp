@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 
 
 import { AppComponent } from './app.component';
+import { TarjetaCreditoModule } from './tarjeta-credito/tarjeta-credito.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    TarjetaCreditoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

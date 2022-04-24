@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TarjetaCredito } from '../../models/TarjetaCredito';
 
 @Component({
   selector: 'app-tarjeta-list',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TarjetaListComponent implements OnInit {
 
+
+  listTarjetas: TarjetaCredito[]=[]
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  editarTarjeta(){
+
+  }
+
+  eliminarTarjeta(){
+
   }
 
 }
