@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TarjetaCredito } from '../../models/TarjetaCredito';
 
 @Component({
@@ -9,7 +9,7 @@ import { TarjetaCredito } from '../../models/TarjetaCredito';
 export class TarjetaListComponent implements OnInit {
 
 
-  listTarjetas: TarjetaCredito[]=[]
+  @Input() listTarjetas: TarjetaCredito[]=[]
 
   constructor() { }
 
