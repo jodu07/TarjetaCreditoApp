@@ -48,9 +48,31 @@ export class CreateCardComponent implements OnInit {
     this.agregarTarjeta();
   } else {
     // editamos una nueva tarjeta
- //   this.editarTarjeta(this.id)
+    this.editarTarjeta(this.id);
 
   }
+}
+
+editarTarjeta(id: string){
+  const TARJETA: any = {
+    titular: this.form.value.titular,
+    numeroTarjeta: this.form.value.numeroTarjeta,
+    fechaExpiracion: this.form.value.fechaExpiracion,
+    cvv: this.form.value.cvv,    
+    fechaActualizacion: new Date(),
+
+  }
+  this.loading = true;
+  this._tarjetaService.editarTarjeta(id, TARJETA).then(() =>{
+    this.loading = false;
+    this.titulo = 'agregar tarjeta';
+    this.form.reset();
+    this.id = undefined;
+    this.toastr.info('La tarjeta fue actualizada con exito!', 'REGISTRO ACTUALIZADO')
+  }, error => {
+    console.log(error);
+  })
+
 }
 
 agregarTarjeta(){
