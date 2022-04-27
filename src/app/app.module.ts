@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { ToastrModule } from 'ngx-toastr';
 
 import { environment } from 'src/environments/environment';
 
@@ -19,7 +20,8 @@ import { TarjetaCreditoModule } from './tarjeta-credito/tarjeta-credito.module';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    TarjetaCreditoModule
+    TarjetaCreditoModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
