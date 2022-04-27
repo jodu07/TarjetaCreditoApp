@@ -19,10 +19,27 @@ export class CreateCardComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private _tarjetaService: TarjetaCreditoService,
     private toastr: ToastrService) {
+
+      this.form = this.fb.group({
+        titular: ['', Validators.required], 
+        numeroTarjeta: ['',[Validators.required, Validators.minLength(16), Validators.maxLength(16)]], 
+        fechaExpiracion: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]], 
+        cvv: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]], 
+      })
     
     }
 
   ngOnInit(): void {
+    this._tarjetaService.getTarjetaEdit().subscribe(data =>{      
+      this.id = data.id;
+      this.titulo = 'editar tarjeta';
+      this.form.patchValue({
+        titular: data.titular,
+        numeroTarjeta: data.numeroTarjeta,
+        fechaExpiracion: data.fechaExpiracion,
+        cvv: data.cvv
+      })
+    })
   }
 
   guardarTarjeta(){
