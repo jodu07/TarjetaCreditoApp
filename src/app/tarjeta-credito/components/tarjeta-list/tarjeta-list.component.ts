@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { TarjetaCredito } from '../../models/TarjetaCredito';
+import { TarjetaCreditoService } from '../../services/tarjeta-credito.service';
 
 @Component({
   selector: 'app-tarjeta-list',
@@ -9,19 +11,43 @@ import { TarjetaCredito } from '../../models/TarjetaCredito';
 export class TarjetaListComponent implements OnInit {
 
 
-  @Input() listTarjetas: TarjetaCredito[]=[]
+  listTarjetas: TarjetaCredito[]=[]
 
-  constructor() { }
+  constructor(private _tarjetaService: TarjetaCreditoService,
+            private toastr: ToastrService
+
+  ) { }
 
   ngOnInit(): void {
+    this.obtenerTarjetas();
   }
 
-  editarTarjeta(){
-
+   // Obtener el id y la informacion 
+   obtenerTarjetas(){
+    this._tarjetaService.getTarjetas().subscribe(doc => {           
+      this.listTarjetas = [];
+      doc.forEach((element: any) => {
+        this.listTarjetas.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        });
+      });
+      console.log(this.listTarjetas);
+    })
   }
 
-  eliminarTarjeta(){
+  eliminarTarjeta(id: any) {
+    this._tarjetaService.eliminarTarjeta(id).then(() => {
+      this.toastr.error('La tarjeta fue eliminada!', 'TARJETA ELIMINADA' )
 
+    }, error =>{
+      this.toastr.error('Opps.. Ocurrío un error', 'Error');
+      console.log(error);
+    })
+  }
+
+  editarTarjeta(tarjeta: TarjetaCredito){
+    this._tarjetaService.addTarjetaEdit(tarjeta);
   }
 
 }
