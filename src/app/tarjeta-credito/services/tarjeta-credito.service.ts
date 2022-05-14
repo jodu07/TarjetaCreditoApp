@@ -16,13 +16,15 @@ export class TarjetaCreditoService {
     return this.firestore.collection('tarjetas', ref => ref.orderBy('fechaCreacion', 'asc')).snapshotChanges();
   }
 
+  eliminarTarjeta(id: string): Promise<any>{
+    return this.firestore.collection('tarjetas').doc(id).delete();
+  }
+
   guardarTarjeta(tarjeta: TarjetaCredito): Promise<any> {
     return this.firestore.collection('tarjetas').add(tarjeta);
   }
 
-  eliminarTarjeta(id: string): Promise<any>{
-    return this.firestore.collection('tarjetas').doc(id).delete();
-  }
+ 
 
   editarTarjeta(id: string, tarjeta:any): Promise<any>{
     return this.firestore.collection('tarjetas').doc(id).update(tarjeta);
